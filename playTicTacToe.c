@@ -177,7 +177,7 @@ int play(int siz)
     //Check board for player ###########################################
     for(i=0;i<=5;i++)
     {
-        if(board[x-2+i][y]=='X'){
+        if(board[x+2-i][y]=='X'){
             check++;
             }
         else{
@@ -290,8 +290,11 @@ int continuePlay(){
       }
       printf("\n");
     }
-    // First player move #######################################
-    printf("Set coordinations\n");
+    //Game Loop #################################################
+    while(1)
+    {
+    //Player move ####################################################
+    printf("Set coordinations(If you want to save in X type -1)\n");
     do
     {
         int result;
@@ -305,6 +308,24 @@ int continuePlay(){
                 result = scanf("%*s");
                 }
         }while(1);
+    //Save game #######################################################
+        if(x == -1){
+            printf("Name the save: ");
+            scanf("%s", &save);
+            strcat(save, txt);
+            fp = fopen(save, "w");
+            fprintf(fp, "%d",siz);
+            for(i = 0; i <= siz-1; i++)
+            {
+                for(a = 0; a <= siz-1; a++)
+                {
+                    fprintf(fp,"%c",board[i][a]);
+                }
+            }
+            fclose(fp);
+            return 9;
+
+        }
         do{
             printf("Y: ");
             result = scanf("%d",&y);
@@ -331,9 +352,9 @@ int continuePlay(){
     }while(x < 0 || y < 0 || x >= siz-2 || y >= siz-2 || board[x][y] != '-' );
         board[x][y] = 'X';
     //Check board for player ###########################################
- for(i=0;i<=5;i++)
+    for(i=0;i<=5;i++)
     {
-        if(board[x-2+i][y]=='X'){
+        if(board[x+2-i][y]=='X'){
             check++;
             }
         else{
@@ -387,9 +408,6 @@ int continuePlay(){
             return 9;
         }
     }
-    //Game Loop #################################################
-    while(1)
-    {
     //CPU move ##################################################
     int seed = time(0);
     srand(seed);
@@ -400,24 +418,7 @@ int continuePlay(){
 
     }while(board[d][z] != '-' && d >=2 && d<siz-2 && z >=2 && z<siz-2);
     board[d][z]= 'O';
-    //Show board ####################################################
-    for(i = 1;i<siz-2;i++)
-    {
-        if(i>1){
-        printf("%d",(i-2));
-        }else{
-        printf(" ");
-        }
-      for(a = 2; a < siz-2; a++)
-      {
-        if(i<2){
-        printf(" %d ",(a-2));
-        }else{
-        printf("[%c]",board[i][a]);
-        }
-      }
-      printf("\n");
-    }
+
      //Check board for CPU ########################################
     for(i=0;i<=5;i++)
     {
@@ -488,122 +489,25 @@ int continuePlay(){
           }
       }
     }
-    //Player move ####################################################
-    printf("Set coordinations(If you want to save in X type -1)\n");
-    do
+    //Show board ####################################################
+    for(i = 1;i<siz-2;i++)
     {
-        int result;
-        do{
-            printf("X: ");
-            result = scanf("%d",&x);
-            if(result)
-                break;
-            else{
-                printf("Only numbers!\n");
-                result = scanf("%*s");
-                }
-        }while(1);
-    //Save game #######################################################
-        if(x == -1){
-            printf("Name the save: ");
-            scanf("%s", &save);
-            strcat(save, txt);
-            fp = fopen(save, "w");
-            fprintf(fp, "%d",siz);
-            printf("check");
-            for(i = 0; i <= siz-1; i++)
-            {
-                for(a = 0; a <= siz-1; a++)
-                {
-                    fprintf(fp,"%c",board[i][a]);
-                }
-            }
-            fclose(fp);
-            return 9;
-
+        if(i>1){
+        printf("%d",(i-2));
+        }else{
+        printf(" ");
         }
-        do{
-            printf("Y: ");
-            result = scanf("%d",&y);
-            if(result)
-                break;
-            else{
-                printf("Only numbers!");
-                result = scanf("%*s");
-                }
-        }while(1);
-
-        x +=2;
-        y +=2;
-        if(x >= siz-2 || y >= siz-2)
-        {
-            printf("Wrong coordinates\n");
+      for(a = 2; a < siz-2; a++)
+      {
+        if(i<2){
+        printf(" %d ",(a-2));
+        }else{
+        printf("[%c]",board[i][a]);
         }
-
-        if(board[x][y] != '-')
-            {
-                printf("This coordinates are non-empty\n");
-            }
-
-    }while(x < 0 || y < 0 || x >= siz-2 || y >= siz-2 || board[x][y] != '-' );
-        board[x][y] = 'X';
-    //Check board for player ###########################################
- for(i=0;i<=5;i++)
-    {
-        if(board[x-2+i][y]=='X'){
-            check++;
-            }
-        else{
-            check=0;
-            }
-        if(check==3)
-        {
-            printf("You win!\n");
-            return 9;
-        }
+      }
+      printf("\n");
     }
-    for(i=0;i<=5;i++)
-    {
-        if(board[x][y-2+i]=='X'){
-            check++;
-            }
-        else{
-            check=0;
-            }
-        if(check==3)
-        {
-            printf("You win!\n");
-            return 9;
-        }
-    }
-    for(i=0;i<=5;i++)
-    {
-        if(board[x-2+i][y-2+i]=='X'){
-            check++;
-            }
-        else{
-            check=0;
-            }
-        if(check==3)
-        {
-            printf("You win!\n");
-            return 9;
-        }
-    }
-    for(i=0;i<=5;i++)
-    {
-        if(board[x-2+i][y+2-i]=='X'){
-            check++;
-            }
-        else{
-            check=0;
-            }
-        if(check==3)
-        {
-            printf("You win!\n");
-            return 9;
-        }
-    }
+
     }
 }
 
