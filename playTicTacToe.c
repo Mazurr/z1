@@ -258,7 +258,7 @@ int continuePlay(){
     strcat(save, txt);
     if((fp = fopen(save, "rb"))==NULL)
     {
-        printf("Nie ma takiego pliku!");
+        printf("File doesn't exist!");
         return 9;
     }
     //Fill board ################################################
