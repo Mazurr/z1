@@ -175,7 +175,7 @@ int play(int siz)
     }while(x < 0 || y < 0 || x >= siz-2 || y >= siz-2 || board[x][y] != '-' );
         board[x][y] = 'X';
     //Check board for player ###########################################
- for(i=0;i<=5;i++)
+    for(i=0;i<=5;i++)
     {
         if(board[x-2+i][y]=='X'){
             check++;
