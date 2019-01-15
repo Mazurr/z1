@@ -177,7 +177,7 @@ int play(int siz)
     //Check board for player ###########################################
     for(i=0;i<=5;i++)
     {
-        if(board[x+2-i][y]=='X'){
+        if(board[x-2+i][y]=='X'){
             check++;
             }
         else{
@@ -354,7 +354,7 @@ int continuePlay(){
     //Check board for player ###########################################
     for(i=0;i<=5;i++)
     {
-        if(board[x+2-i][y]=='X'){
+        if(board[x-2+i][y]=='X'){
             check++;
             }
         else{
