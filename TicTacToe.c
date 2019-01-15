@@ -36,8 +36,16 @@ int main(int argc, char** argv){
      case 1:
       {
         //Game
-        printf("Choose the board size(from 3 to infinity):");
-        scanf("%d", &size);
+        do{
+            printf("Choose the board size(from 3 to infinity):");;
+            result = scanf("%d",&size);
+            if(result)
+                break;
+            else{
+                printf("Only numbers!\n");
+                result = scanf("%*s");
+                }
+        }while(1);
         select = play(size);
         break;
         }
