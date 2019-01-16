@@ -177,6 +177,20 @@ int play(int siz)
     //Check board for player ###########################################
     for(i=0;i<=5;i++)
     {
+        if(board[x+2-i][y]=='X'){
+            check++;
+            }
+        else{
+            check=0;
+            }
+        if(check==3)
+        {
+            printf("You win!\n");
+            return 9;
+        }
+    }
+    for(i=0;i<=5;i++)
+    {
         if(board[x-2+i][y]=='X'){
             check++;
             }
@@ -352,6 +366,20 @@ int continuePlay(){
     }while(x < 0 || y < 0 || x >= siz-2 || y >= siz-2 || board[x][y] != '-' );
         board[x][y] = 'X';
     //Check board for player ###########################################
+    for(i=0;i<=5;i++)
+    {
+        if(board[x+2-i][y]=='X'){
+            check++;
+            }
+        else{
+            check=0;
+            }
+        if(check==3)
+        {
+            printf("You win!\n");
+            return 9;
+        }
+    }
     for(i=0;i<=5;i++)
     {
         if(board[x-2+i][y]=='X'){
